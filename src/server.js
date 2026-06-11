@@ -14,6 +14,7 @@ import "dotenv/config";
 // process.env so every other import can access secrets via process.env.KEY.
 
 import express from "express";
+import cors from "cors";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 
@@ -34,6 +35,13 @@ const PORT = process.env.PORT || 3000; // Use the .env value, or 3000 as a fallb
 // ── Middleware stack ───────────────────────────────────────────────────
 // Middleware runs on EVERY request before it reaches any route.
 // Express processes middleware in the order it's registered — order matters.
+
+app.use(cors());
+// ↑ Adds Access-Control-Allow-Origin headers so a webpage served from a
+// DIFFERENT origin (e.g. our consumer app on http://localhost:8080) is
+// allowed by the browser to call this API. cors() with no options allows
+// ALL origins — appropriate for a public, non-authenticated read API like
+// this. A private API would restrict it, e.g. cors({ origin: "https://myapp.com" }).
 
 app.use(express.json());
 // ↑ Parses incoming JSON request bodies into req.body.
