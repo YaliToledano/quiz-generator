@@ -1,0 +1,22 @@
+{
+  "name": "quiz-generator",
+  "version": "1.0.0",
+  "description": "Upload a PDF or PowerPoint, generate a multiple-choice quiz with AI, and play it in the browser.",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.104.1",
+    "@google/generative-ai": "^0.24.1",
+    "better-sqlite3": "^12.10.0",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "multer": "^2.1.1",
+    "officeparser": "^7.2.1",
+    "pdf-parse": "^2.4.5"
+  }
+}

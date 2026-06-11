@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Quiz Generator</title>
+
+    <!--
+      Tailwind CSS via CDN.
+      Tailwind is a utility-first CSS library: instead of writing custom CSS,
+      you apply small class names like "bg-white" or "text-xl" directly in HTML.
+      The CDN version scans your page for class names and generates the CSS on
+      the fly in the browser. For a production app you'd build a CSS file
+      instead, but for learning this approach is fine.
+    -->
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <!--
+    The body starts almost empty — no visible content here.
+    All the actual content (buttons, questions, answers) is built and
+    injected by app.js using JavaScript.
+
+    This is the Single-Page Application (SPA) pattern:
+      - One HTML file, served once.
+      - JavaScript shows/hides sections and fills them with content.
+      - No full page reload between "screens".
+  -->
+  <body class="bg-slate-950 min-h-screen flex items-center justify-center p-4">
+    <main class="w-full max-w-2xl">
+
+      <!-- Three screen containers. Only one is visible at a time.
+           app.js fills them with content and toggles the "hidden" class. -->
+      <div id="upload-screen"></div>
+      <div id="quiz-screen"    class="hidden"></div>
+      <div id="results-screen" class="hidden"></div>
+
+    </main>
+
+    <!--
+      type="module" does two things:
+        1. Enables ES module syntax (import/export) in this script.
+        2. Defers execution automatically — app.js runs after the HTML
+           above is fully parsed, so getElementById() calls always succeed.
+    -->
+    <script type="module" src="/js/app.js"></script>
+  </body>
+</html>
