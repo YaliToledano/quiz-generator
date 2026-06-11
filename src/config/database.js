@@ -13,13 +13,22 @@
 // ═══════════════════════════════════════════════════════════════════════
 
 import Database from "better-sqlite3";
+import { mkdirSync } from "fs";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 
 // Build the path to the DB file relative to THIS file's location,
 // not the working directory (which changes depending on where you run npm start).
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const dbPath = join(__dirname, "..", "..", "data", "quizzes.db");
+const dataDir = join(__dirname, "..", "..", "data");
+const dbPath = join(dataDir, "quizzes.db");
+
+// Ensure the data/ folder exists before opening the database.
+// Git doesn't track empty folders, so on a fresh deploy (e.g. Railway)
+// the data/ directory won't exist and better-sqlite3 would crash trying
+// to create the file inside a missing folder. recursive:true makes this
+// a safe no-op when the folder already exists.
+mkdirSync(dataDir, { recursive: true });
 
 // Open the database. If the file doesn't exist yet, better-sqlite3 creates it.
 const db = new Database(dbPath);
